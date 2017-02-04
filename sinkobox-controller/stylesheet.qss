@@ -1,0 +1,24 @@
+QPushButton {
+	color: rgb(200, 200, 200);
+	background-color: rgb(30, 30, 30);
+	font: bold large "Sans Serif";
+	font-size: 48px;
+}
+
+QLabel {
+	font: bold large "Sans Serif";
+	font-size: 48px;
+	color: rgb(200, 200, 200);
+	qproperty-alignment: AlignCenter;
+}
+
+QScrollArea {
+	background-color: black;
+	border: 0px;
+}
+
+QRadioButton {
+	color: rgb(200, 200, 200);
+	font: large "Sans Serif";
+}
+
