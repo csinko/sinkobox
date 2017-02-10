@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = sinkobox-controller1.0.0
-DISTDIR = /home/csinko/Projects/sinkobox-controller/.tmp/sinkobox-controller1.0.0
+DISTDIR = /home/csinko/Projects/sinkobox/sinkobox-controller/.tmp/sinkobox-controller1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-O1,--sort-common,--as-needed,-z,relro
 LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -51,16 +51,20 @@ OBJECTS_DIR   = ./
 SOURCES       = main.cpp \
 		mainwindow.cpp \
 		maincontent.cpp \
-		settingscontent.cpp moc_mainwindow.cpp \
+		settingscontent.cpp \
+		infocontent.cpp moc_mainwindow.cpp \
 		moc_maincontent.cpp \
-		moc_settingscontent.cpp
+		moc_settingscontent.cpp \
+		moc_infocontent.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		maincontent.o \
 		settingscontent.o \
+		infocontent.o \
 		moc_mainwindow.o \
 		moc_maincontent.o \
-		moc_settingscontent.o
+		moc_settingscontent.o \
+		moc_infocontent.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -176,10 +180,12 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
 		sinkobox-controller.pro mainwindow.h \
 		maincontent.h \
-		settingscontent.h main.cpp \
+		settingscontent.h \
+		infocontent.h main.cpp \
 		mainwindow.cpp \
 		maincontent.cpp \
-		settingscontent.cpp
+		settingscontent.cpp \
+		infocontent.cpp
 QMAKE_TARGET  = sinkobox-controller
 DESTDIR       = 
 TARGET        = sinkobox-controller
@@ -441,8 +447,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h maincontent.h settingscontent.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp maincontent.cpp settingscontent.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h maincontent.h settingscontent.h infocontent.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp maincontent.cpp settingscontent.cpp infocontent.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -474,27 +480,32 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -Wall -W -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_maincontent.cpp moc_settingscontent.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_maincontent.cpp moc_settingscontent.cpp moc_infocontent.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_maincontent.cpp moc_settingscontent.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_maincontent.cpp moc_settingscontent.cpp moc_infocontent.cpp
 moc_mainwindow.cpp: maincontent.h \
 		mainwindow.h \
 		mainwindow.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/csinko/Projects/sinkobox-controller -I/home/csinko/Projects/sinkobox-controller -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-pc-linux-gnu -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/csinko/Projects/sinkobox/sinkobox-controller -I/home/csinko/Projects/sinkobox/sinkobox-controller -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-pc-linux-gnu -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 moc_maincontent.cpp: mainwindow.h \
 		maincontent.h \
 		maincontent.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/csinko/Projects/sinkobox-controller -I/home/csinko/Projects/sinkobox-controller -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-pc-linux-gnu -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed -I/usr/include maincontent.h -o moc_maincontent.cpp
+	/usr/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/csinko/Projects/sinkobox/sinkobox-controller -I/home/csinko/Projects/sinkobox/sinkobox-controller -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-pc-linux-gnu -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed -I/usr/include maincontent.h -o moc_maincontent.cpp
 
 moc_settingscontent.cpp: settingscontent.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/csinko/Projects/sinkobox-controller -I/home/csinko/Projects/sinkobox-controller -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-pc-linux-gnu -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed -I/usr/include settingscontent.h -o moc_settingscontent.cpp
+	/usr/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/csinko/Projects/sinkobox/sinkobox-controller -I/home/csinko/Projects/sinkobox/sinkobox-controller -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-pc-linux-gnu -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed -I/usr/include settingscontent.h -o moc_settingscontent.cpp
+
+moc_infocontent.cpp: infocontent.h \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/csinko/Projects/sinkobox/sinkobox-controller -I/home/csinko/Projects/sinkobox/sinkobox-controller -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-pc-linux-gnu -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed -I/usr/include infocontent.h -o moc_infocontent.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -516,7 +527,8 @@ main.o: main.cpp mainwindow.h \
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
 		maincontent.h \
-		settingscontent.h
+		settingscontent.h \
+		infocontent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 maincontent.o: maincontent.cpp maincontent.h \
@@ -526,6 +538,9 @@ maincontent.o: maincontent.cpp maincontent.h \
 settingscontent.o: settingscontent.cpp settingscontent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settingscontent.o settingscontent.cpp
 
+infocontent.o: infocontent.cpp infocontent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infocontent.o infocontent.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
@@ -534,6 +549,9 @@ moc_maincontent.o: moc_maincontent.cpp
 
 moc_settingscontent.o: moc_settingscontent.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_settingscontent.o moc_settingscontent.cpp
+
+moc_infocontent.o: moc_infocontent.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_infocontent.o moc_infocontent.cpp
 
 ####### Install
 

@@ -47,7 +47,6 @@ SettingsContent::SettingsContent(QWidget *parent)
 		wifiLayout->addLayout(wifiEnabler);
 
 
-
 		//Settings Options
 		layout->addWidget(moveMusicButton);
 		layout->addSpacing(50);

@@ -27,6 +27,7 @@ class MainWindow : public QMainWindow {
 	public slots:
 		void handleSettings();
 		void handleBack();
+		void handleInfo();
 };
 
 #endif // MAINWINDOW _H

@@ -22,3 +22,8 @@ QRadioButton {
 	font: large "Sans Serif";
 }
 
+QLabel#detail {
+	font: bold "Sans Serif";
+	color: rgb(200, 200, 200);
+	font-size: 24px;
+}

@@ -9,6 +9,10 @@
 #include <QLabel>
 #include <string>
 #include <stdio.h>
+#include "infocontent.h"
+
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {	
 	mainWidget = new QWidget(this);
@@ -34,8 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
 	
 	connect(backButton, SIGNAL (released()), this, SLOT (handleBack()));
 
-
 }
+
 
 void MainWindow::handleSettings() {
 	printf("Settings Clicked\n");
@@ -44,8 +48,16 @@ void MainWindow::handleSettings() {
 	contentWidget = new SettingsContent(this);
 	layout->addWidget(contentWidget, 1);
 	backButton->setEnabled(true);
-	mainWidget->repaint();
-	contentWidget->repaint();
+	this->repaint();
+}
+
+void MainWindow::handleInfo() {
+	printf("Info Clicked\n");
+	layout->removeWidget(contentWidget);
+	delete contentWidget;
+	contentWidget = new InfoContent(this);
+	layout->addWidget(contentWidget, 1);
+	backButton->setEnabled(true);
 	this->repaint();
 }
 

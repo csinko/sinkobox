@@ -12,8 +12,10 @@ QT += widgets core gui
 SOURCES += main.cpp \
 	mainwindow.cpp \
 	maincontent.cpp \
-	settingscontent.cpp
+	settingscontent.cpp \
+	infocontent.cpp
 
 HEADERS += mainwindow.h \
 	maincontent.h \
-	settingscontent.h
+	settingscontent.h \
+	infocontent.h

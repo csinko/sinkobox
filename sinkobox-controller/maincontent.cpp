@@ -28,6 +28,7 @@ MainContent::MainContent(QWidget *parent)
 		button9->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 		
 		connect(button1, SIGNAL (released()), parent, SLOT (handleSettings()));
+		connect(button3, SIGNAL (released()), parent, SLOT (handleInfo()));
 		connect(button5, SIGNAL (released()), this, SLOT (handleMusic()));
 	
 		layout = new QGridLayout();	
