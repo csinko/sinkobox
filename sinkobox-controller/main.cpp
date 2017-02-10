@@ -11,11 +11,13 @@
 #include "mainwindow.h"
 
 int main(int argc, char *argv[]) {
-	QFile File("stylesheet.qss");
+	
+	QApplication *app = new QApplication(argc, argv);
+	QFile File(QApplication::applicationDirPath() + "/stylesheet.qss");
 	File.open(QFile::ReadOnly);
 	QString StyleSheet = QLatin1String(File.readAll());
-	QApplication *app = new QApplication(argc, argv);
 	app->setStyleSheet(StyleSheet);
+
 
 	MainWindow mainWindow;
 	mainWindow.show();
