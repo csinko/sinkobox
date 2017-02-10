@@ -39,10 +39,6 @@ InfoContent::InfoContent(QWidget *parent)
 		
 		//IP
 		ipLayout = new QHBoxLayout();
-		printf(getifaddrs());
-		printf("\n Done \n");
-
-
 
 		//Music Info
 		musicLayout = new QVBoxLayout();
