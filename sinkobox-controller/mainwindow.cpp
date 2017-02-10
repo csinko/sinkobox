@@ -10,14 +10,15 @@
 #include <string>
 #include <stdio.h>
 #include "infocontent.h"
-
+#include <QSize>
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {	
 	mainWidget = new QWidget(this);
 	this->setCentralWidget(mainWidget);
-	
+	this->setFixedSize(QSize(800, 480));	
+
 	layout = new QVBoxLayout(mainWidget);
 
 	menuLayout = new QHBoxLayout();

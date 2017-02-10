@@ -2,12 +2,12 @@ QPushButton {
 	color: rgb(200, 200, 200);
 	background-color: rgb(30, 30, 30);
 	font: bold large "Sans Serif";
-	font-size: 48px;
+	font-size: 36px;
 }
 
 QLabel {
 	font: bold large "Sans Serif";
-	font-size: 48px;
+	font-size: 36px;
 	color: rgb(200, 200, 200);
 	qproperty-alignment: AlignCenter;
 }

@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
 
 	MainWindow mainWindow;
-	mainWindow.show();
+	mainWindow.showFullScreen();
 
 	QPalette pal = app->palette();
 	pal.setColor(QPalette::Window, Qt::black);
